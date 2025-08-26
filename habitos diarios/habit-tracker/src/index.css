@@ -1,0 +1,310 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  /* Cores Cyberpunk */
+  --bg-dark: #1a0f28; /* Fundo muito escuro, quase preto com toque de roxo */
+  --text-primary: #e0e0e0; /* Texto principal claro */
+  --neon-blue: #00bcd4; /* Azul ciano neon */
+  --neon-purple: #8800ff; /* Roxo neon */
+  --neon-pink: #ff0077; /* Rosa neon */
+  --neon-green: #00ff77; /* Verde neon */
+  --accent-grey: #4a4a4a; /* Cinza para bordas e detalhes */
+  --completed-text: #00ff77; /* Cor para hábito concluído */
+}
+
+body {
+  font-family: 'Roboto Mono', monospace; /* Fonte para código/terminal */
+  /* Remove background-color: var(--bg-dark); daqui */
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0; /* Remova o padding do body, vamos colocar no container */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  /* Estilos para a imagem de fundo */
+  background-image: url('./assets/images/cyberpunk-background.jpg'); /* Caminho para sua imagem */
+  background-size: cover; /* Faz a imagem cobrir todo o fundo */
+  background-position: center; /* Centraliza a imagem */
+  background-attachment: fixed; /* Fixa a imagem para que não role com o conteúdo */
+  background-repeat: no-repeat; /* Evita que a imagem se repita */
+
+  /* Adiciona um overlay escuro para melhorar a legibilidade do texto */
+  position: relative; /* Necessário para o pseudo-elemento */
+
+  /* Opções adicionais para tentar melhorar a percepção (raramente faz diferença para pixelização) */
+  image-rendering: -webkit-optimize-contrast; /* Para navegadores Webkit */
+  image-rendering: crisp-edges; /* Para navegadores modernos */
+  /* Essas propriedades são mais para redimensionamento de imagens em pixels (como em jogos retrô)
+     e geralmente não corrigem imagens de baixa resolução para fundos complexos. */
+
+  /* ... restante do seu CSS ... */
+}
+
+/* Pseudo-elemento para o overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay preto com 50% de opacidade */
+  z-index: -1; /* Garante que o overlay fique abaixo do conteúdo */
+}
+
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif; /* Fonte mais futurista para títulos */
+  color: var(--neon-purple);
+  text-shadow: 0 0 8px var(--neon-purple), 0 0 15px var(--neon-pink);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  background-color: rgba(10, 0, 20, 0.7); /* Fundo do container com mais transparência */
+  border: 2px solid var(--neon-blue);
+  box-shadow: 0 0 15px var(--neon-blue), 0 0 30px rgba(0, 188, 212, 0.5);
+  padding: 30px;
+  border-radius: 8px; /* Pequenas bordas arredondadas para um toque moderno */
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  z-index: 1; /* Garante que o container fique acima do overlay */
+  margin-bottom: 20px; /* Adiciona margem inferior para o container */
+}
+
+/* Restante do CSS permanece o mesmo */
+input[type="text"] {
+  width: calc(100% - 24px); /* Ajuste para padding */
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--neon-green);
+  color: var(--text-primary);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1rem;
+  box-shadow: 0 0 5px var(--neon-green);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 8px var(--neon-blue), 0 0 15px var(--neon-purple);
+}
+
+button {
+  background-color: var(--neon-purple);
+  color: var(--text-primary);
+  border: 2px solid var(--neon-pink);
+  padding: 10px 20px;
+  margin: 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--neon-purple);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: var(--neon-pink);
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 12px var(--neon-pink), 0 0 20px var(--neon-purple);
+  transform: translateY(-2px);
+}
+
+/* Estilo para Checkbox */
+input[type="checkbox"] {
+  appearance: none; /* Esconde o checkbox padrão */
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neon-blue);
+  background-color: rgba(0, 188, 212, 0.1);
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--neon-green);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 8px var(--neon-green);
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓'; /* Adiciona um "check" visual */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--bg-dark); /* Cor do check */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Lista de Hábitos */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--accent-grey);
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--neon-blue);
+}
+
+li span {
+  flex-grow: 1; /* Permite que o texto do hábito ocupe o espaço */
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+li span.completed {
+  text-decoration: line-through;
+  color: var(--completed-text); /* Verde neon para concluído */
+  text-shadow: 0 0 5px var(--completed-text);
+}
+
+/* Botões dentro do LI */
+li button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-width: 1px;
+}
+
+li button:first-of-type { /* Excluir */
+  background-color: rgba(255, 0, 0, 0.4);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
+}
+
+li button:first-of-type:hover {
+  background-color: rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+li button:last-of-type { /* Editar */
+  background-color: rgba(0, 188, 212, 0.4);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.4);
+}
+
+li button:last-of-type:hover {
+  background-color: rgba(0, 188, 212, 0.6);
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.6);
+}
+
+/* Filtros */
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filters-container button {
+    background-color: var(--accent-grey);
+    border-color: var(--neon-blue);
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.filters-container button:hover {
+    background-color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    color: var(--bg-dark);
+    box-shadow: 0 0 8px var(--neon-blue);
+}
+
+
+/* Animação para o Fundo - Pontos de Brilho Neon */
+@keyframes neon-glow-subtle {
+  0% { transform: translate(0, 0); opacity: 0.8; }
+  25% { transform: translate(-2px, -2px); opacity: 0.6; }
+  50% { transform: translate(2px, 2px); opacity: 0.8; }
+  75% { transform: translate(-2px, 2px); opacity: 0.6; }
+  100% { transform: translate(2px, -2px); opacity: 0.8; }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--scanline-color) 0px,
+    var(--scanline-color) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Adicionando o brilho neon rosa sutil */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Mantém o overlay escuro */
+  
+  /* Gradiente para um brilho mais suave e circular */
+  background-image: 
+    radial-gradient(circle at 15% 25%, var(--neon-pink) 0%, transparent 5%),
+    radial-gradient(circle at 80% 70%, var(--neon-pink) 0%, transparent 6%),
+    radial-gradient(circle at 45% 55%, var(--neon-pink) 0%, transparent 4%);
+
+  background-size: 80% 80%; /* Controla o tamanho dos brilhos */
+  background-repeat: no-repeat;
+  animation: neon-glow-subtle 4s infinite ease-in-out;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Note: Modifiquei o `body::before` para incluir os brilhos aleatórios. 
+   Se você já o usava para o overlay, remova o `background-color` e adicione-o em um novo pseudo-elemento se preferir. */
+
+
+/* Rastro de Luz Rosa no Cursor */
+/* Adicione esta nova classe ao seu CSS */
+.cursor-trail {
+  position: fixed;
+  pointer-events: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 500%;
+  background: radial-gradient(circle, var(--neon-green), transparent);
+  mix-blend-mode: screen; /* Efeito de mistura com o fundo */
+  opacity: 0.8;
+  transition: transform 0.1s, opacity 1s ease-out;
+  transform: translate(1%, 1%);
+  z-index: 900;
+}
