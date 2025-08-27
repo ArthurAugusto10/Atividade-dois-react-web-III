@@ -10,6 +10,7 @@
   --neon-purple: #8800ff; /* Roxo neon */
   --neon-pink: #ff0077; /* Rosa neon */
   --neon-green: #00ff77; /* Verde neon */
+  --neon-yellow: #ffeb3b; 
   --accent-grey: #4a4a4a; /* Cinza para bordas e detalhes */
   --completed-text: #00ff77; /* Cor para hábito concluído */
 }
@@ -240,71 +241,70 @@ li button:last-of-type:hover {
 }
 
 
-/* Animação para o Fundo - Pontos de Brilho Neon */
-@keyframes neon-glow-subtle {
-  0% { transform: translate(0, 0); opacity: 0.8; }
-  25% { transform: translate(-2px, -2px); opacity: 0.6; }
-  50% { transform: translate(2px, 2px); opacity: 0.8; }
-  75% { transform: translate(-2px, 2px); opacity: 0.6; }
-  100% { transform: translate(2px, -2px); opacity: 0.8; }
+/* Animação para o Fundo - Brilho Sutil */
+@keyframes subtle-glow {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--scanline-color) 0px,
-    var(--scanline-color) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  z-index: -1;
-  pointer-events: none;
+/* Animação para os elementos de UI aparecerem */
+@keyframes slide-in-top {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Adicionando o brilho neon rosa sutil */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Mantém o overlay escuro */
-  
-  /* Gradiente para um brilho mais suave e circular */
-  background-image: 
-    radial-gradient(circle at 15% 25%, var(--neon-pink) 0%, transparent 5%),
-    radial-gradient(circle at 80% 70%, var(--neon-pink) 0%, transparent 6%),
-    radial-gradient(circle at 45% 55%, var(--neon-pink) 0%, transparent 4%);
-
-  background-size: 80% 80%; /* Controla o tamanho dos brilhos */
-  background-repeat: no-repeat;
-  animation: neon-glow-subtle 4s infinite ease-in-out;
-  z-index: -1;
-  pointer-events: none;
+/* Animação de pulso para botões */
+@keyframes pulse-neon {
+  0% { box-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple); }
+  50% { box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+  100% { box-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple); }
 }
-/* Note: Modifiquei o `body::before` para incluir os brilhos aleatórios. 
-   Se você já o usava para o overlay, remova o `background-color` e adicione-o em um novo pseudo-elemento se preferir. */
 
+/* ... mantenha todas as suas cores, fontes e estilos de body existentes ... */
 
-/* Rastro de Luz Rosa no Cursor */
-/* Adicione esta nova classe ao seu CSS */
+/* Aplicação das novas animações */
+.container {
+  /* Adicione a animação de entrada */
+  animation: slide-in-top 0.8s ease-out;
+  /* ... mantenha o restante do estilo do container ... */
+}
+
+h1, h2, h3 {
+  /* Substitua a animação de brilho por um brilho estático */
+  text-shadow: 0 0 10px var(--neon-purple), 0 0 15px var(--neon-pink);
+  /* ... mantenha o restante do estilo dos títulos ... */
+}
+
+input[type="text"]:focus {
+  /* Efeito de brilho de foco suave */
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+  transition: all 0.3s ease-in-out;
+}
+
+button {
+  /* Adicione a animação de pulso */
+  animation: pulse-neon 2s infinite alternate ease-in-out;
+  /* ... mantenha o restante do estilo do botão ... */
+}
+
+li {
+  /* Adicione uma animação de entrada para cada item da lista */
+  animation: slide-in-top 0.5s ease-out;
+  /* ... mantenha o restante do estilo do item de lista ... */
+}
+
+/* Remova todas as animações e keyframes antigas que você não quer mais, como @keyframes glitch-border */
+/* src/index.css */
+
 .cursor-trail {
   position: fixed;
   pointer-events: none;
   width: 50px;
   height: 50px;
-  border-radius: 500%;
-  background: radial-gradient(circle, var(--neon-green), transparent);
-  mix-blend-mode: screen; /* Efeito de mistura com o fundo */
-  opacity: 0.8;
-  transition: transform 0.1s, opacity 1s ease-out;
-  transform: translate(1%, 1%);
-  z-index: 900;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  /* Remova qualquer "transition" daqui */
 }
